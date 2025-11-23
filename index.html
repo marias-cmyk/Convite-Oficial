@@ -3,19 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite Especial</title>
+    <title>Convite - I Simpósio de Pesquisa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset e variáveis */
-        :root {
-            --primary-color: #8a8565;
-            --secondary-color: #767154;
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -23,39 +13,30 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: 1.5rem;
-            color: var(--text-color);
-            overflow-x: hidden;
+            justify-content: center;
+            padding: 2rem;
+            color: #333;
             line-height: 1.6;
         }
 
-        /* Header */
         .header {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2.5rem;
-            padding: 1rem 0;
+            margin-bottom: 3rem;
+            text-align: center;
         }
 
         .header h1 {
-            color: var(--secondary-color);
+            color: #767154;
             font-weight: 400;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: 2.2rem;
             letter-spacing: 3px;
-            text-align: center;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Envelope Section */
         .envelope-section {
             position: relative;
             margin-bottom: 2rem;
@@ -63,7 +44,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 1200px;
         }
 
         .envelope-container {
@@ -74,16 +54,15 @@
             margin: 0 auto;
             cursor: pointer;
             z-index: 10;
-            transition: var(--transition);
         }
 
         .envelope {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: var(--primary-color);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            background: #8a8565;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
             z-index: 2;
             border-radius: 0 0 12px 12px;
         }
@@ -94,9 +73,9 @@
             left: 0;
             width: 100%;
             height: 50%;
-            background: var(--secondary-color);
+            background: #767154;
             transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 3;
             border-radius: 12px 12px 0 0;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -120,7 +99,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.6s ease;
         }
 
         .seal-image {
@@ -158,270 +137,146 @@
             pointer-events: none;
         }
 
-        @keyframes mirror {
-            0% {
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(5px);
-            }
-        }
-
-        /* Letter */
         .letter {
-            position: absolute;
-            width: calc(100% - 40px);
-            height: calc(100% - 40px);
-            top: 20px;
-            left: 20px;
-            z-index: 1;
-            transition: var(--transition);
-            transform: translateY(0);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 95%;
+            max-width: 800px;
+            max-height: 85vh;
+            background: white;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            padding: 3.5rem;
+            z-index: 100;
             opacity: 0;
-            overflow: visible;
-            border-radius: 8px;
-            cursor: pointer;
-            background: transparent;
-            box-shadow: none;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+            border: 1px solid #e8e8e8;
         }
 
         .letter.open {
             opacity: 1;
-            transform: translateY(0);
-            z-index: 100;
-            width: min(90vw, 800px);
-            height: auto;
-            max-height: 90vh;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border-radius: 16px;
-            overflow-y: auto;
-            padding: 1.5rem;
-            animation: letterAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        @keyframes letterAppear {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -40%);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
+            visibility: visible;
         }
 
-        .letter-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .page {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            min-height: 400px;
-        }
-
-        #page1 {
-            transform: translateX(0);
-            opacity: 1;
-            z-index: 2;
-        }
-
-        #page2 {
-            transform: translateX(100%);
-            opacity: 0;
-            z-index: 1;
-        }
-
-        .page-slide-out #page1 {
-            transform: translateX(-100%);
-            opacity: 0;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .page-slide-out #page2 {
-            transform: translateX(0);
-            opacity: 1;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .page-return #page1 {
-            transform: translateX(0);
-            opacity: 1;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .page-return #page2 {
-            transform: translateX(100%);
-            opacity: 0;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Text content styling */
-        .page-title {
-            font-size: 1.8rem;
-            color: var(--secondary-color);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            width: 100%;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-        }
-        
-        .page-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            text-align: justify;
-            margin-bottom: 1.5rem;
-        }
-        
-        .event-details {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            border-left: 4px solid var(--secondary-color);
-        }
-        
-        .event-details h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        .event-details p {
-            margin-bottom: 0.5rem;
-        }
-        
-        .event-details strong {
-            color: var(--secondary-color);
-        }
-        
-        .page-footer {
-            margin-top: 2rem;
-            text-align: center;
-            font-style: italic;
-            color: #666;
-            width: 100%;
-        }
-
-        /* Instructions */
-        .instructions {
-            margin-top: 2rem;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            color: #666;
-            text-align: center;
-            max-width: 500px;
-            line-height: 1.6;
-        }
-        
-        /* Close button for letter */
         .close-letter {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
             width: 2.5rem;
             height: 2.5rem;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.08);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 101;
-            transition: var(--transition);
             border: none;
             font-size: 1.2rem;
             color: #555;
+            transition: all 0.3s ease;
         }
 
         .close-letter:hover {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.15);
             transform: scale(1.1);
         }
-        
-        /* Overlay for letter */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
+
+        .letter-content {
+            text-align: center;
+        }
+
+        .institution-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .institution-header p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .event-title {
+            font-size: 2.2rem;
+            color: #8a2b2b;
+            margin: 2rem 0 1.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .event-subtitle {
+            font-size: 1.5rem;
+            color: #767154;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .invitation-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 2rem;
+            color: #444;
         }
         
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .event-details {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2.5rem 0;
+            border-left: 4px solid #8a8565;
         }
         
-        /* Page indicators */
-        .page-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .event-details h3 {
+            color: #767154;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
         }
         
-        .page-indicator {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ddd;
-            transition: var(--transition);
-            cursor: pointer;
+        .event-details p {
+            margin-bottom: 0.8rem;
+            text-align: center;
+            font-size: 1.1rem;
         }
         
-        .page-indicator.active {
-            background: var(--secondary-color);
-            transform: scale(1.2);
+        .event-details strong {
+            color: #8a2b2b;
         }
         
-        /* Media Queries */
+        .institution-footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            border-top: 1px solid #e8e8e8;
+            padding-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .instructions {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            max-width: 500px;
+            font-style: italic;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
 
-            .header {
-                margin-bottom: 2rem;
+            .header h1 {
+                font-size: 1.8rem;
             }
 
             .envelope-container {
@@ -433,87 +288,27 @@
                 height: 48%;
             }
             
-            .letter.open {
-                width: 95vw;
-                padding: 1rem;
-                border-radius: 12px;
+            .letter {
+                padding: 2rem;
+                width: 96%;
+                max-height: 90vh;
             }
             
-            .page {
-                padding: 1.5rem;
-                min-height: 350px;
+            .event-title {
+                font-size: 1.8rem;
             }
             
-            .page-title {
-                font-size: 1.5rem;
-            }
-            
-            .page-text {
-                font-size: 1rem;
-            }
-            
-            .close-letter {
-                top: 0.5rem;
-                right: 0.5rem;
-                width: 2rem;
-                height: 2rem;
-                font-size: 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 0.5rem;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .envelope-container {
-                width: 95vw;
-                height: 60vw;
-            }
-
-            .letter.open {
-                padding: 0.75rem;
-            }
-            
-            .page {
-                padding: 1rem;
-                min-height: 300px;
-            }
-            
-            .page-title {
+            .event-subtitle {
                 font-size: 1.3rem;
             }
             
-            .instructions {
-                margin-top: 1.5rem;
+            .invitation-text {
+                font-size: 1.1rem;
             }
-        }
-        
-        /* Loading animation */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
+            
+            .event-details {
+                padding: 1.5rem;
             }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
-        .envelope-container:hover .envelope {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Focus styles for accessibility */
-        .envelope-container:focus {
-            outline: 2px solid var(--secondary-color);
-            outline-offset: 4px;
         }
     </style>
 </head>
@@ -523,67 +318,52 @@
     </div>
 
     <div class="envelope-section">
-        <div class="envelope-container" id="envelope" tabindex="0" aria-label="Clique para abrir o envelope">
+        <div class="envelope-container" id="envelope">
             <div class="envelope" id="envelope-body">
                 <div class="envelope-flap"></div>
                 <div class="seal">
                     <img src="https://cdn.pixabay.com/photo/2017/08/06/00/36/seal-2589336_1280.png" alt="Selo do envelope" class="seal-image">
                 </div>
-                <div class="letter" id="letter">
-                    <button class="close-letter" aria-label="Fechar carta">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="letter-content">
-                        <div class="page-container">
-                            <div class="page" id="page1">
-                                <h2 class="page-title">I Simpósio de Pesquisa</h2>
-                                <p class="page-text">O Grupo de Estudo e Pesquisa – História, Literatura e Espiritualidades – GEPHLE, da Faculdade de Filosofia Dom Aureliano Matos – FAFIDAM-UECE, tem o prazer de convidá-los ao I Simpósio de Pesquisa: A História e o Paradigma Espiritual.</p>
-                                <div class="event-details">
-                                    <h3>Informações do Evento</h3>
-                                    <p><strong>Local:</strong> FAFIDAM - Campus da UECE, Limoeiro do Norte-CE</p>
-                                    <p><strong>Data:</strong> 09, 10 e 11 de dezembro de 2025</p>
-                                </div>
-                                <p class="page-footer">Clique para continuar lendo...</p>
-                            </div>
-                            <div class="page" id="page2">
-                                <h2 class="page-title">Sobre o Simpósio</h2>
-                                <p class="page-text">Neste evento, contemplaremos as questões da experiência humana no campo historiográfico, considerando as dimensões espirituais, culturais e simbólicas, estabelecendo-o a partir das discussões entre pesquisadores de diferentes Instituições de Ensino Superior.</p>
-                                <p class="page-text">O evento proporcionará um espaço de diálogo acadêmico interdisciplinar, promovendo reflexões sobre as interfaces entre história, literatura e espiritualidade, com foco nas diversas manifestações culturais e religiosas que constituem o tecido social.</p>
-                                <p class="page-text">Contamos com a participação de todos para enriquecer este debate e construir conhecimentos significativos que contribuam para a compreensão da complexidade da experiência humana em suas múltiplas dimensões.</p>
-                                <div class="page-footer">
-                                    <p>GEPHLE - FAFIDAM-UECE</p>
-                                    <p>Clique para voltar</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="page-indicators">
-                            <div class="page-indicator active" data-page="1"></div>
-                            <div class="page-indicator" data-page="2"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <p class="instructions">Clique no envelope para abrir o convite. Depois, clique nas páginas para navegar.</p>
     </div>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="letter" id="letter">
+        <button class="close-letter" aria-label="Fechar carta">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="letter-content">
+            <div class="institution-header">
+                <p>Grupo de Estudo e Pesquisa – História, Literatura e Espiritualidades – GEPHLE</p>
+                <p>Faculdade de Filosofia Dom Aureliano Matos – FAFIDAM-UECE</p>
+            </div>
+            
+            <h1 class="event-title">I Simpósio de Pesquisa:<br>A História e o Paradigma Espiritual</h1>
+            
+            <p class="invitation-text">Temos a honra de convidar a todos para participar do I Simpósio de Pesquisa: A História e o Paradigma Espiritual, no qual abordaremos questões fundamentais da experiência humana no campo historiográfico, considerando as dimensões espirituais, culturais e simbólicas que permeiam nossa compreensão da história.</p>
+            
+            <p class="invitation-text">Este evento constitui-se como um espaço privilegiado de diálogo acadêmico, estabelecendo pontes entre pesquisadores de distintas Instituições de Ensino Superior, com o propósito de enriquecer nossa compreensão sobre as complexas relações entre história, espiritualidade e cultura.</p>
+            
+            <div class="event-details">
+                <h3>Informações do Evento</h3>
+                <p><strong>Local:</strong> FAFIDAM - Campus da UECE, Limoeiro do Norte-CE</p>
+                <p><strong>Data:</strong> 09, 10 e 11 de dezembro de 2025</p>
+            </div>
+            
+            <p class="institution-footer">Atenciosamente,<br>GEPHLE - FAFIDAM-UECE</p>
+        </div>
+    </div>
+
+    <p class="instructions">Clique no envelope para abrir o convite</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const envelope = document.getElementById('envelope-body');
             const letter = document.getElementById('letter');
-            const overlay = document.getElementById('overlay');
             const closeBtn = document.querySelector('.close-letter');
-            const letterContent = document.querySelector('.letter-content');
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
-            const pageIndicators = document.querySelectorAll('.page-indicator');
             const envelopeContainer = document.getElementById('envelope');
 
             let isOpen = false;
-            let isSecondPageVisible = false;
 
             // Abrir envelope
             envelopeContainer.addEventListener('click', function() {
@@ -592,101 +372,36 @@
                 }
             });
 
-            // Tecla Enter para acessibilidade
-            envelopeContainer.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && !isOpen) {
-                    openEnvelope();
-                }
-            });
-            
-            // Navegação entre páginas
-            page1.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (isOpen && !isSecondPageVisible) {
-                    showSecondPage();
-                }
-            });
-
-            page2.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (isOpen && isSecondPageVisible) {
-                    showFirstPage();
-                }
-            });
-
             // Fechar carta
             closeBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 closeEnvelope();
             });
-            
-            overlay.addEventListener('click', function() {
-                closeEnvelope();
-            });
-            
-            // Indicadores de página
-            pageIndicators.forEach(indicator => {
-                indicator.addEventListener('click', function() {
-                    const pageNum = this.getAttribute('data-page');
-                    if (pageNum === '1' && isSecondPageVisible) {
-                        showFirstPage();
-                    } else if (pageNum === '2' && !isSecondPageVisible) {
-                        showSecondPage();
-                    }
-                });
+
+            // Fechar ao clicar fora da carta
+            letter.addEventListener('click', function(e) {
+                if (e.target === letter) {
+                    closeEnvelope();
+                }
             });
 
             function openEnvelope() {
                 envelope.classList.add('open');
                 setTimeout(function() {
                     letter.classList.add('open');
-                    overlay.classList.add('active');
                     document.body.style.overflow = 'hidden';
-                }, 400);
+                }, 500);
                 isOpen = true;
             }
 
             function closeEnvelope() {
-                letterContent.classList.add('page-return');
                 letter.classList.remove('open');
-                overlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
 
                 setTimeout(function() {
                     envelope.classList.remove('open');
                     isOpen = false;
-                    resetPages();
-                    setTimeout(function() {
-                        letterContent.classList.remove('page-return');
-                    }, 600);
                 }, 300);
-            }
-
-            function showSecondPage() {
-                letterContent.classList.add('page-slide-out');
-                isSecondPageVisible = true;
-                updatePageIndicators(2);
-            }
-            
-            function showFirstPage() {
-                letterContent.classList.remove('page-slide-out');
-                isSecondPageVisible = false;
-                updatePageIndicators(1);
-            }
-
-            function resetPages() {
-                letterContent.classList.remove('page-slide-out');
-                isSecondPageVisible = false;
-                updatePageIndicators(1);
-            }
-            
-            function updatePageIndicators(activePage) {
-                pageIndicators.forEach(indicator => {
-                    indicator.classList.remove('active');
-                    if (indicator.getAttribute('data-page') == activePage) {
-                        indicator.classList.add('active');
-                    }
-                });
             }
             
             // Tecla ESC para fechar
